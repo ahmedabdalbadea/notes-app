@@ -7,13 +7,12 @@ class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 24, left: 24, right: 16, bottom: 24),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.amberAccent,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
         children:  [
           ListTile(
             contentPadding: EdgeInsets.zero,
@@ -38,8 +37,8 @@ class NoteItem extends StatelessWidget {
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+          Align(
+            alignment: AlignmentGeometry.centerRight,
             child: Text(
               "May 21,2022",
               style: TextStyle(
