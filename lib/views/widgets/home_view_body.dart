@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes_app/views/widgets/custom_app_bar.dart';
 import 'package:notes_app/views/widgets/note_item.dart';
 
@@ -19,11 +18,24 @@ class HomeViewBody extends StatelessWidget {
             onPressed: () {},
           ),
           SizedBox(height: 16),
-          NoteItem(
-            title: "Flutter Tips",
-            subTitle: "Build Your Career in Flutter",
-            date: "Jan 31, 2026",
-            color: Colors.amber,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: NoteItem(
+                      title: "Flutter Tips",
+                      subTitle: "Build Your Career in Flutter with any Acdamey",
+                      date: "Jan 31, 2026",
+                      color: Colors.amber,
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),
