@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/views/widgets/custom_app_bar.dart';
-import 'package:notes_app/views/widgets/note_item.dart';
+import 'package:notes_app/views/widgets/list_view_home_body.dart';
 
-class HomeViewBody extends StatefulWidget {
+class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
 
-  @override
-  State<HomeViewBody> createState() => _HomeViewBodyState();
-}
-
-class _HomeViewBodyState extends State<HomeViewBody> {
-
-  @override
-  void initState() {
-    
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,25 +18,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             onPressed: () {},
           ),
           SizedBox(height: 16),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: NoteItem(
-                      title: "Flutter Tips",
-                      subTitle: "Build Your Career in Flutter with any Acdamey",
-                      date: "Jan 31, 2026",
-                      color: Colors.amber,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+          ListViewHomeBody()
         ],
       ),
     );

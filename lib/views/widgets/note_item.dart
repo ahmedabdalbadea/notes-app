@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
+
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({
-    Key? key,
-    required this.title,
-    required this.subTitle,
-    required this.date,
-    required this.color,
-  }) : super(key: key);
-  final String title, subTitle, date;
-  final Color color;
+  const NoteItem({Key? key, required this.note}) : super(key: key);
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,14 +26,14 @@ class NoteItem extends StatelessWidget {
         padding: EdgeInsets.all(24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: color,
+          color: Color(note.color),
         ),
         child: Column(
           children: [
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
-                title,
+                note.title,
                 style: TextStyle(
                   fontSize: 24,
                   color: Colors.black,
@@ -46,23 +43,29 @@ class NoteItem extends StatelessWidget {
               subtitle: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  subTitle,
+                  note.subTitle,
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black.withValues(alpha: 0.5),
                   ),
                 ),
               ),
-              trailing: Icon(
-                FontAwesomeIcons.trash,
-                color: Colors.black,
-                size: 28,
+              trailing: IconButton(
+                onPressed: () {
+                  note.delete();
+                  BlocProvider.of<NotesCubit>(context).fetchNotes();
+                },
+                icon: Icon(
+                  FontAwesomeIcons.trash,
+                  color: Colors.black,
+                  size: 28,
+                ),
               ),
             ),
             Align(
               alignment: AlignmentGeometry.centerRight,
               child: Text(
-                date,
+                note.date,
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black.withValues(alpha: 0.5),
