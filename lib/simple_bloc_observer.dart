@@ -15,9 +15,21 @@ class SimpleBlocObserver extends BlocObserver {
   }
 
   @override
+  void onCreate(BlocBase bloc) {
+    debugPrint("Create = $bloc");
+    super.onCreate(bloc);
+  }
+
+  @override
+  void onClose(BlocBase bloc) {
+    debugPrint("Close = $bloc");
+    super.onClose(bloc);
+  }
+
+  @override
   void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
     debugPrint("Change = $change");
+    super.onChange(bloc, change);
   }
 
   @override

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/views/widgets/home_view_body.dart';
 import 'package:notes_app/views/widgets/modal_bottom_sheet.dart';
 
@@ -7,17 +9,20 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: HomeViewBody(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => showModalBottomSheet(
-          isScrollControlled: true,
-          context: context,
-          builder: (context) {
-            return ModalBottomSheet();
-          },
+    return BlocProvider(
+      create: (context) => NotesCubit(),
+      child: Scaffold(
+        body: HomeViewBody(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            builder: (context) {
+              return ModalBottomSheet();
+            },
+          ),
+          child: Icon(Icons.add),
         ),
-        child: Icon(Icons.add),
       ),
     );
   }
