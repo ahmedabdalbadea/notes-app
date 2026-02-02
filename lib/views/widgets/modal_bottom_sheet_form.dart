@@ -65,7 +65,9 @@ class _ModalBottomSheetFormState extends State<ModalBottomSheetForm> {
                       title: title!,
                       subTitle: subTitle!,
                       date: DateFormat.yMMMd().format(DateTime.now()),
-                      color: BlocProvider.of<AddNoteCubit>(context).color!.toARGB32(),
+                      color: BlocProvider.of<AddNoteCubit>(
+                        context,
+                      ).color!.toARGB32(),
                     ),
                   );
                 } else {
