@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/views/widgets/custom_elevated_button.dart';
-import 'package:notes_app/views/widgets/custom_text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/cubits/cubit/add_note_cubit.dart';
 import 'package:notes_app/views/widgets/modal_bottom_sheet_form.dart';
 
 class ModalBottomSheet extends StatelessWidget {
@@ -8,15 +8,25 @@ class ModalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsetsGeometry.only(
-          top: 28,
-          left: 24,
-          right: 24,
-          bottom: MediaQuery.of(context).viewInsets.bottom,
+    return BlocProvider(
+      create: (context) => AddNoteCubit(),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsetsGeometry.only(
+            top: 28,
+            left: 24,
+            right: 24,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: BlocBuilder<AddNoteCubit, AddNoteState>(
+            builder: (context, state) {
+              return AbsorbPointer(
+                absorbing: state is AddNoteLoading ? true : false,
+                child: ModalBottomSheetForm(),
+              );
+            },
+          ),
         ),
-        child: ModalBottomSheetForm(),
       ),
     );
   }
