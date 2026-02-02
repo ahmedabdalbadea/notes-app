@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/views/widgets/colors_list_view.dart';
 import 'package:notes_app/views/widgets/custom_elevated_button.dart';
 import 'package:notes_app/views/widgets/custom_text_field.dart';
 
@@ -52,6 +53,8 @@ class _ModalBottomSheetFormState extends State<ModalBottomSheetForm> {
               maxLines: 5,
             ),
             SizedBox(height: 16),
+            ColorsListView(),
+            SizedBox(height: 16),
             CustomElevatedButton(
               title: "Add",
               onPressed: () {
@@ -62,7 +65,7 @@ class _ModalBottomSheetFormState extends State<ModalBottomSheetForm> {
                       title: title!,
                       subTitle: subTitle!,
                       date: DateFormat.yMMMd().format(DateTime.now()),
-                      color: Colors.blueAccent.toARGB32(),
+                      color: BlocProvider.of<AddNoteCubit>(context).color!.toARGB32(),
                     ),
                   );
                 } else {
